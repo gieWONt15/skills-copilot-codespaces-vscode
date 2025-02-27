@@ -1,14 +1,17 @@
-const http = require('http');
-
-const hostname = '127.0.0.1';
-const port = 3000;
-
-const server = http.createServer((req, res) => {
-    res.statusCode = 200;
-    res.setHeader('Content-Type', 'text/plain');
-    res.end('Hello, World!\n');
+// create web server
+// import express module
+const express = require('express');
+// import the comments array from the data.js file
+const { comments } = require('./data');
+// create an express application
+const app = express();
+// set the port for the server
+const port = 4001;
+// get all comments
+app.get('/comments', (req, res) => {
+    res.send(comments);
 });
-
-server.listen(port, hostname, () => {
-    console.log(`Server running at http://${hostname}:${port}/`);
+// listen for requests
+app.listen(port, () => {
+    console.log(`Server is listening on port ${port}`);
 });
